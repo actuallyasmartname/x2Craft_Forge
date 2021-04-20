@@ -17,6 +17,9 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
+      - name: chmod
+        if: ${{ runner.os != 'Windows' }}
+        run: chmod +x ./gradlew
       - name: gradle wrapper make
         run: ./gradlew wrapper --gradle-version=6.8.3
       - name: validate gradle wrapper
@@ -26,9 +29,6 @@ jobs:
         with:
           distribution: adopt
           java-version: ${{ matrix.java }}
-      - name: make gradle wrapper executable
-        if: ${{ runner.os != 'Windows' }}
-        run: chmod +x ./gradlew
       - name: build
         run: ./gradlew build --stacktrace --warning-mode all
       - name: test
