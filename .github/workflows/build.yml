@@ -17,6 +17,10 @@ jobs:
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
+- name: Update Gradle Wrapper
+  # You may pin to the exact commit or the version.
+  # uses: rahulsom/gradle-up@600c5f46102213d08bd027c2181c0c30ea7565cb
+  uses: rahulsom/gradle-up@v0.1.0
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
       - name: setup jdk ${{ matrix.java }}
